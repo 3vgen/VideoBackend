@@ -1,0 +1,24 @@
+from fastapi import FastAPI
+from app.db.connections import engine
+from app.video.model import Base
+from app.video.routers import router
+
+app = FastAPI(
+    title="Video Management API",
+    description="REST API для работы с базой данных видео",
+    version="1.0.0",
+)
+
+
+@app.on_event("startup")
+async def startup():
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+
+
+app.include_router(router)
+
+
+@app.get("/", tags=["health"])
+async def root():
+    return {"status": "ok", "message": "Video API is running"}
