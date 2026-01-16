@@ -3,7 +3,6 @@ __pycache__
 *.pyo
 *.pyd
 venv
-.env
 .DS_Store
 .git
 *.log
