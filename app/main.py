@@ -1,3 +1,4 @@
+import uvicorn
 from fastapi import FastAPI
 from app.db.connections import engine
 from app.video.model import Base
@@ -22,3 +23,7 @@ app.include_router(router)
 @app.get("/", tags=["health"])
 async def root():
     return {"status": "ok", "message": "Video API is running"}
+
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="0.0.0.0", port=80, reload=True)
