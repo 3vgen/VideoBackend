@@ -3,6 +3,10 @@ from fastapi import FastAPI
 from app.db.connections import engine
 from app.video.model import Base
 from app.video.routers import router
+from logging_config import setup_logging
+
+
+setup_logging()
 
 app = FastAPI(
     title="Video Management API",
