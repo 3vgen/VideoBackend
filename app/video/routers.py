@@ -115,8 +115,7 @@ async def update_video_status(
         old_status = video.status
         video = await crud.update_video_status(db, video, data.status)
         logger.info(
-            "Updated video id=%s status: %s -> %s",
-            video_id, old_status, data.status
+            "Updated video id=%s status: %s -> %s", video_id, old_status, data.status
         )
         return video
     except HTTPException:

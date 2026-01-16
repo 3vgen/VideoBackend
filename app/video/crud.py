@@ -8,8 +8,8 @@ from app.video.model import Video, VideoStatus
 
 
 async def create_video(
-        session: AsyncSession,
-        data: dict,
+    session: AsyncSession,
+    data: dict,
 ) -> Video:
     video = Video(**data)
     session.add(video)
@@ -19,22 +19,20 @@ async def create_video(
 
 
 async def get_video_by_id(
-        session: AsyncSession,
-        video_id: int,
+    session: AsyncSession,
+    video_id: int,
 ) -> Video | None:
-    result = await session.execute(
-        select(Video).where(Video.id == video_id)
-    )
+    result = await session.execute(select(Video).where(Video.id == video_id))
     return result.scalar_one_or_none()
 
 
 async def get_videos(
-        session: AsyncSession,
-        status: list[VideoStatus] | None = None,
-        camera_number: list[int] | None = None,
-        location: list[str] | None = None,
-        start_time_from: datetime | None = None,
-        start_time_to: datetime | None = None,
+    session: AsyncSession,
+    status: list[VideoStatus] | None = None,
+    camera_number: list[int] | None = None,
+    location: list[str] | None = None,
+    start_time_from: datetime | None = None,
+    start_time_to: datetime | None = None,
 ) -> Sequence[Video]:
     stmt = select(Video)
 
@@ -54,9 +52,9 @@ async def get_videos(
 
 
 async def update_video_status(
-        session: AsyncSession,
-        video: Video,
-        status: VideoStatus,
+    session: AsyncSession,
+    video: Video,
+    status: VideoStatus,
 ) -> Video:
     video.status = status
     await session.commit()
